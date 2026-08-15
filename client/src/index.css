@@ -1,4 +1,4 @@
-/* Sunlit Sanctuary: warm editorial healthcare with forest green, limestone, and Saffron Sunline accents. */
+/* Local Welcome System: original hospitality-led dental design with forest, limestone, saffron, direct call actions, and verified local-practice details. */
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -86,6 +86,7 @@
   .hero-section { position:relative; display:grid; grid-template-columns:minmax(0, .95fr) minmax(390px,1.05fr); min-height:670px; padding:clamp(4rem,8vw,8.5rem) clamp(1.25rem,7vw,8.6rem) clamp(4rem,7vw,7.5rem); overflow:hidden; }
   .hero-copy { position:relative; z-index:2; align-self:center; padding:2rem clamp(0rem,3vw,3rem) 2rem 0; }
   .hero-signature { display:flex; align-items:center; gap:.75rem; }
+  .hero-clinic-name { margin-top:1.45rem; color:#45675b; font-size:10px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; }
   .eyebrow { display:flex; align-items:center; gap:.65rem; color:#9a5a27; font-size:10px; font-weight:800; letter-spacing:.15em; }
   .sunline { display:inline-block; width:29px; height:2px; border-radius:2px; background:#d7853c; }
   h1, h2, h3, p { margin:0; }
@@ -110,6 +111,15 @@
   .intro-statement { max-width:900px; margin-top:.8rem; color:#173f36; font-family:"DM Serif Display",serif; font-size:clamp(1.85rem,3.2vw,3.65rem); letter-spacing:-.045em; line-height:1.03; }
   .round-arrow { display:grid; width:55px; height:55px; place-items:center; border:1px solid rgba(23,63,54,.3); border-radius:50%; color:#173f36; transition:background .2s ease, color .2s ease, transform .2s ease; }
   .round-arrow:hover { transform:rotate(45deg); background:#173f36; color:#fff9ef; }
+  .first-visit-section { display:grid; grid-template-columns:minmax(0,1fr) minmax(420px,.88fr) auto; align-items:stretch; gap:clamp(1.5rem,4vw,4.5rem); padding:clamp(4.5rem,8vw,7.5rem) clamp(1.25rem,7vw,8.6rem); background:#e7eee5; }
+  .first-visit-intro { display:flex; align-items:flex-start; gap:1.2rem; }
+  .first-visit-intro h2 { max-width:650px; }
+  .first-visit-intro > div:last-child > p:not(.eyebrow) { max-width:620px; margin-top:1.15rem; color:#5a7267; font-size:13px; line-height:1.75; }
+  .first-visit-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem; }
+  .first-visit-step { min-height:210px; padding:1.1rem; border:1px solid rgba(23,63,54,.18); background:rgba(252,249,242,.55); }
+  .first-visit-step > span { color:#d7853c; font-size:10px; font-weight:900; letter-spacing:.15em; }
+  .first-visit-step h3 { margin-top:2.65rem; color:#173f36; font-size:1.4rem; letter-spacing:-.035em; line-height:1; }
+  .first-visit-step p { margin-top:.75rem; color:#5d7569; font-size:11px; line-height:1.65; }
   .care-section { padding:clamp(5.5rem,10vw,10rem) clamp(1.25rem,7vw,8.6rem); background:#fcf9f2; }
   .section-header { display:grid; gap:2rem; }
   .split-heading { grid-template-columns:minmax(0,1.3fr) minmax(250px,.55fr); align-items:end; }
@@ -198,7 +208,8 @@
   .hero-copy { max-width:670px; padding-right:0; }
   .hero-detail { margin-top:2.75rem; }
   .hero-visual { width:min(100%,600px); justify-self:center; }
-  .split-heading, .visit-section, .details-section, .faq-section, .location-section { grid-template-columns:1fr; }
+  .split-heading, .visit-section, .details-section, .faq-section, .location-section, .first-visit-section { grid-template-columns:1fr; }
+  .first-visit-section > .round-arrow { display:none; }
   .care-list { grid-template-columns:repeat(3,minmax(230px,1fr)); overflow-x:auto; padding-bottom:.5rem; }
   .care-card { min-width:260px; }
   .visit-photo-wrap { min-height:420px; }
@@ -221,6 +232,9 @@
   .hero-visual { padding-right:1rem; padding-bottom:1rem; }
   .hero-note { right:-.2rem; font-size:9px; }
   .intro-band { grid-template-columns:1fr auto; }
+  .first-visit-steps { grid-template-columns:1fr; }
+  .first-visit-step { min-height:0; }
+  .first-visit-step h3 { margin-top:1.4rem; }
   .intro-marker { display:none; }
   .care-section { padding-top:4.5rem; }
   .care-list { margin-top:2.8rem; }

@@ -2,82 +2,27 @@
  * Sunlit Sanctuary design system: warm editorial healthcare, local Adajan specificity,
  * calm pathways, Saffron Sunline accents, and offset gallery-walk composition.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
   CalendarDays,
   ChevronDown,
   ChevronRight,
   Compass,
-  HeartPulse,
   MapPin,
   Menu,
   Phone,
-  ScanLine,
   ShieldCheck,
-  Sparkles,
-  Stethoscope,
   X,
 } from "lucide-react";
-
-const phoneNumber = "+91 63526 86155";
-const phoneHref = "tel:+916352686155";
-const mapHref =
-  "https://www.google.com/maps/place/Riddhi+Dental+Clinic+%26+Implant+Center/@21.2011161,72.7894545,17z";
-
-const carePaths = [
-  {
-    number: "01",
-    label: "THE EVERYDAY VISIT",
-    title: "The care that keeps life moving.",
-    text: "For the questions, check-ins, and everyday dental needs that deserve a calm, considered conversation.",
-    action: "Plan a visit",
-    icon: HeartPulse,
-    tone: "sage",
-  },
-  {
-    number: "02",
-    label: "THE SMILE CONVERSATION",
-    title: "A more confident way to talk about your smile.",
-    text: "Start with what you notice, what you hope for, and a clear discussion about the next appropriate step.",
-    action: "Talk through options",
-    icon: Sparkles,
-    tone: "clay",
-  },
-  {
-    number: "03",
-    label: "RESTORATIVE & IMPLANT CARE",
-    title: "When the next step feels bigger.",
-    text: "Get guidance for restorative needs and implant-related conversations in a setting designed to feel unhurried.",
-    action: "Ask about a consult",
-    icon: ScanLine,
-    tone: "forest",
-  },
-];
-
-const questions = [
-  {
-    question: "Where is Riddhi Dental Clinic & Implant Center located?",
-    answer:
-      "The clinic is located at Rutvan Apartment on Gangeshwar Mahadev Temple Road, opposite Axis Bank, Adajan Gam, Surat 395009.",
-  },
-  {
-    question: "How can I begin an appointment conversation?",
-    answer:
-      "Call the clinic directly at +91 63526 86155. The booking experience can be connected to the practice’s preferred system before launch.",
-  },
-  {
-    question: "How can I get the details relevant to my visit?",
-    answer:
-      "Call the clinic directly at +91 63526 86155 to discuss your question and confirm the details relevant to your appointment.",
-  },
-];
+import { clinicProfile } from "@/config/clinic";
+import { clinicDetails } from "@/config/client-details";
 
 function Mark({ className = "" }: { className?: string }) {
   return (
     <img
-      src="/clinic-assets/riddhi-logo-mark.png"
-      alt="Riddhi Dental Clinic abstract smile mark"
+      src={clinicProfile.assets.logo}
+      alt={`${clinicProfile.fullName} abstract smile mark`}
       className={className}
     />
   );
@@ -91,37 +36,41 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openQuestion, setOpenQuestion] = useState(0);
 
+  useEffect(() => {
+    document.title = clinicProfile.pageTitle;
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#f6f1e8] text-[#183d35]">
       <div className="location-ribbon">
-        <span>RIDDHI DENTAL CLINIC & IMPLANT CENTER</span>
+        <span>{clinicProfile.fullName.toUpperCase()}</span>
         <span className="hidden sm:inline">—</span>
-        <span>ADAJAN, SURAT</span>
+        <span>{clinicProfile.locationRibbon.toUpperCase()}</span>
       </div>
 
       <header className="site-header">
-        <a className="brand-lockup" href="#top" aria-label="Riddhi Dental Clinic home">
+        <a className="brand-lockup" href="#top" aria-label={`${clinicProfile.fullName} home`}>
           <Mark className="h-14 w-14 object-contain" />
           <span>
-            <strong>Riddhi</strong>
-            <em>Dental Clinic & Implant Center</em>
+            <strong>{clinicProfile.shortName}</strong>
+            <em>{clinicProfile.descriptor}</em>
           </span>
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="#care">Care paths</a>
-          <a href="#visit">Your visit</a>
-          <a href="#location">Location</a>
+          <a href="#first-visit">First visit</a>
+          <a href="#care">Care options</a>
+          <a href="#location">Find us</a>
         </nav>
 
         <div className="header-actions">
-          <a className="phone-link" href={phoneHref}>
+          <a className="phone-link" href={clinicProfile.phoneHref}>
             <Phone size={15} strokeWidth={2.2} />
-            <span>{phoneNumber}</span>
+            <span>{clinicProfile.phoneNumber}</span>
           </a>
-          <a className="btn btn-primary header-cta" href={phoneHref}>
+          <a className="btn btn-primary header-cta" href={clinicProfile.phoneHref}>
             <span>Call the clinic</span>
             <ArrowUpRight size={16} />
           </a>
@@ -137,11 +86,11 @@ export default function Home() {
 
         {menuOpen && (
           <div className="mobile-menu">
-            <a href="#care" onClick={closeMenu}>Care paths</a>
-            <a href="#visit" onClick={closeMenu}>Your visit</a>
-            <a href="#location" onClick={closeMenu}>Location</a>
-            <a className="mobile-call" href={phoneHref} onClick={closeMenu}>
-              <Phone size={16} /> Call {phoneNumber}
+            <a href="#first-visit" onClick={closeMenu}>First visit</a>
+            <a href="#care" onClick={closeMenu}>Care options</a>
+            <a href="#location" onClick={closeMenu}>Find us</a>
+            <a className="mobile-call" href={clinicProfile.phoneHref} onClick={closeMenu}>
+              <Phone size={16} /> Call {clinicProfile.phoneNumber}
             </a>
           </div>
         )}
@@ -153,14 +102,15 @@ export default function Home() {
           <div className="hero-copy">
             <div className="hero-signature">
               <Mark className="h-11 w-11 object-contain" />
-              <p className="eyebrow"><Sunline /> ADAJAN, SURAT • OPP. AXIS BANK</p>
+              <p className="eyebrow"><Sunline /> {clinicProfile.locationEyebrow.toUpperCase()}</p>
             </div>
-            <h1 id="hero-heading">Care that begins with a calmer conversation.</h1>
+            <p className="hero-clinic-name">{clinicProfile.fullName}</p>
+            <h1 id="hero-heading">{clinicProfile.heroHeading}</h1>
             <p className="hero-intro">
-              A more reassuring way to arrive, ask questions, and take the next step for your dental health.
+              {clinicProfile.heroIntro}
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href={phoneHref}>
+              <a className="btn btn-primary" href={clinicProfile.phoneHref}>
                 <Phone size={17} /> Call to plan a visit
               </a>
               <a className="text-action" href="#location">
@@ -169,34 +119,44 @@ export default function Home() {
             </div>
             <div className="hero-detail">
               <Compass size={18} />
-              <span>Opposite Axis Bank, near Gangeshwar Mahadev Temple Road</span>
+              <span>{clinicProfile.heroDetail}</span>
             </div>
           </div>
 
           <div className="hero-visual">
             <div className="hero-image-frame">
               <img
-                src="/clinic-assets/riddhi-hero-sunlit-clinic.webp"
+                src={clinicProfile.assets.hero}
                 alt="A warm, sunlit dental consultation room"
               />
             </div>
             <div className="hero-note">
               <span className="note-dot" />
-              <span>Thoughtful dental care, close to home.</span>
+              <span>{clinicProfile.heroNote}</span>
             </div>
           </div>
         </section>
 
-        <section className="intro-band" aria-label="Clinic introduction">
-          <div className="intro-marker">RD</div>
-          <div>
-            <p className="eyebrow"><Sunline /> A GENTLER START</p>
-            <p className="intro-statement">
-              The best dental visit is not only about the appointment itself. It is about feeling heard before you ever sit in the chair.
-            </p>
+        <section id="first-visit" className="first-visit-section" aria-labelledby="first-visit-heading">
+          <div className="first-visit-intro">
+            <div className="intro-marker">{clinicProfile.monogram}</div>
+            <div>
+              <p className="eyebrow"><Sunline /> NEW PATIENTS · {clinicDetails.localLandmark.toUpperCase()}</p>
+              <h2 id="first-visit-heading">{clinicDetails.firstVisitHeading}</h2>
+              <p>{clinicDetails.firstVisitCopy}</p>
+            </div>
           </div>
-          <a href="#care" className="round-arrow" aria-label="Explore care paths">
-            <ArrowUpRight size={23} />
+          <div className="first-visit-steps">
+            {clinicDetails.firstVisitSteps.map((item) => (
+              <div className="first-visit-step" key={item.step}>
+                <span>{item.step}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </div>
+            ))}
+          </div>
+          <a href={clinicProfile.phoneHref} className="round-arrow" aria-label={`Call ${clinicProfile.fullName}`}>
+            <Phone size={21} />
           </a>
         </section>
 
@@ -212,14 +172,14 @@ export default function Home() {
           </div>
 
           <div className="care-list">
-            {carePaths.map(({ number, label, title, text, action, icon: Icon, tone }) => (
+            {clinicProfile.carePaths.map(({ number, label, title, text, action, icon: Icon, tone }) => (
               <article className={`care-card care-card-${tone}`} key={number}>
                 <div className="care-number">{number}</div>
                 <div className="care-icon"><Icon size={27} strokeWidth={1.5} /></div>
                 <p className="care-label">{label}</p>
                 <h3>{title}</h3>
                 <p className="care-copy">{text}</p>
-                <a href={phoneHref} className="card-action">
+                <a href={clinicProfile.phoneHref} className="card-action">
                   {action} <ChevronRight size={18} />
                 </a>
               </article>
@@ -230,26 +190,26 @@ export default function Home() {
         <section id="visit" className="visit-section" aria-labelledby="visit-heading">
           <div className="visit-copy">
             <p className="eyebrow"><Sunline /> YOUR FIRST STEP</p>
-            <h2 id="visit-heading">A visit should feel clear long before you arrive.</h2>
+            <h2 id="visit-heading">{clinicProfile.visitHeading}</h2>
             <p>
-              Call the clinic to ask your questions and arrange the right time to come in. Your first connection should feel direct, simple, and personal.
+              {clinicProfile.visitCopy}
             </p>
             <div className="visit-links">
-              <a className="btn btn-light" href={phoneHref}>
+              <a className="btn btn-light" href={clinicProfile.phoneHref}>
                 <CalendarDays size={17} /> Speak with the clinic
               </a>
-              <a className="visit-phone" href={phoneHref}>{phoneNumber}</a>
+              <a className="visit-phone" href={clinicProfile.phoneHref}>{clinicProfile.phoneNumber}</a>
             </div>
           </div>
           <div className="visit-photo-wrap">
             <div className="vertical-label">EASE • CLARITY • CARE</div>
             <img
-              src="/clinic-assets/riddhi-treatment-smile.webp"
+              src={clinicProfile.assets.visit}
               alt="A relaxed patient in a welcoming dental consultation setting"
             />
             <div className="photo-affirmation">
               <ShieldCheck size={20} />
-              <span>Ask before you decide.</span>
+              <span>{clinicProfile.visitAffirmation}</span>
             </div>
           </div>
         </section>
@@ -257,7 +217,7 @@ export default function Home() {
         <section className="details-section" aria-label="Care experience">
           <div className="detail-image-column">
             <img
-              src="/clinic-assets/riddhi-care-detail.webp"
+              src={clinicProfile.assets.detail}
               alt="A tranquil, sunlit welcome setting"
             />
           </div>
@@ -291,7 +251,7 @@ export default function Home() {
             <p>Everything a prospective patient needs to feel oriented—without the clutter.</p>
           </div>
           <div className="faq-list">
-            {questions.map((item, index) => {
+            {clinicProfile.questions.map((item, index) => {
               const isOpen = openQuestion === index;
               return (
                 <div className={`faq-item ${isOpen ? "open" : ""}`} key={item.question}>
@@ -308,19 +268,19 @@ export default function Home() {
 
         <section id="location" className="location-section" aria-labelledby="location-heading">
           <div className="location-card">
-            <div className="location-topline"><MapPin size={17} /> FIND US IN ADAJAN</div>
+            <div className="location-topline"><MapPin size={17} /> {clinicProfile.locationShort.toUpperCase()}</div>
             <h2 id="location-heading">Close to the roads you already know.</h2>
             <p>
-              Rutvan Apartment, Gangeshwar Mahadev Temple Rd,<br />
-              Opp. Axis Bank, Adajan Gam, Adajan,<br />
-              Surat, Gujarat 395009.
+              {clinicProfile.addressLines.map((line) => (
+                <span key={line}>{line}<br /></span>
+              ))}
             </p>
             <div className="location-actions">
-              <a className="btn btn-saffron" href={mapHref} target="_blank" rel="noreferrer">
+              <a className="btn btn-saffron" href={clinicProfile.mapHref} target="_blank" rel="noreferrer">
                 <MapPin size={17} /> Get directions
               </a>
-              <a className="text-action light-text" href={phoneHref}>
-                <Phone size={15} /> {phoneNumber}
+              <a className="text-action light-text" href={clinicProfile.phoneHref}>
+                <Phone size={15} /> {clinicProfile.phoneNumber}
               </a>
             </div>
           </div>
@@ -329,7 +289,7 @@ export default function Home() {
             <div className="map-line map-line-two" />
             <div className="map-line map-line-three" />
             <div className="map-pin"><MapPin size={25} /></div>
-            <span className="map-label">ADAJAN</span>
+            <span className="map-label">{clinicProfile.mapLabel.toUpperCase()}</span>
           </div>
         </section>
       </main>
@@ -338,14 +298,14 @@ export default function Home() {
         <div className="footer-brand">
           <Mark className="h-10 w-10 object-contain" />
           <div>
-            <strong>Riddhi Dental</strong>
-            <span>Clinic & Implant Center</span>
+            <strong>{clinicProfile.shortName} Dental</strong>
+            <span>{clinicProfile.descriptor}</span>
           </div>
         </div>
-        <p>Calm conversations. Thoughtful next steps.</p>
+        <p>{clinicProfile.footerLine}</p>
         <div className="footer-links">
-          <a href={phoneHref}>Call the clinic</a>
-          <a href={mapHref} target="_blank" rel="noreferrer">Directions</a>
+          <a href={clinicProfile.phoneHref}>Call the clinic</a>
+          <a href={clinicProfile.mapHref} target="_blank" rel="noreferrer">Directions</a>
         </div>
       </footer>
     </div>
