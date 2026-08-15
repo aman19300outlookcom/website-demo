@@ -6,12 +6,12 @@ This repository is a **static Vite + React single-page application** configured 
 |---|---|
 | Project name | `website-demo` |
 | Build command | `pnpm build` |
-| Deploy command | `pnpm deploy` |
+| Deploy command | `pnpm run deploy` |
 | Builds for non-production branches | Enabled |
-| Non-production branch deploy command | `pnpm deploy:preview` |
+| Non-production branch deploy command | `pnpm run deploy:preview` |
 | Path | `/` |
 | API token | Create new token automatically |
 | API token name | `website-demo-worker-builds` |
 | Environment variables | None required |
 
-Cloudflare installs dependencies from `pnpm-lock.yaml`, runs the build command, and then runs `pnpm deploy`, which maps to the repository’s local Wrangler CLI. Every future production-branch push will build and deploy a Worker version. Non-production branches upload preview versions without replacing production.
+Cloudflare installs dependencies from `pnpm-lock.yaml`, runs the build command, and then runs `pnpm run deploy`, which maps to the repository’s local Wrangler CLI. Every future production-branch push will build and deploy a Worker version. Non-production branches upload preview versions without replacing production.
