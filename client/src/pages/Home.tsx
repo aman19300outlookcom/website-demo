@@ -1,313 +1,318 @@
 /**
- * Sunlit Sanctuary design system: warm editorial healthcare, local Adajan specificity,
- * calm pathways, Saffron Sunline accents, and offset gallery-walk composition.
+ * Akshar Dental Clinic — Surat Morning
+ * Design philosophy: an established Surat clinic presented with editorial calm, warm mineral
+ * surfaces, precise teal accents, and content-first mobile layouts where imagery remains supportive.
  */
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
-  ArrowUpRight,
+  ArrowDownRight,
+  ArrowRight,
   CalendarDays,
-  ChevronDown,
+  Check,
   ChevronRight,
-  Compass,
-  MapPin,
+  Clock3,
   Menu,
-  Phone,
-  ShieldCheck,
+  MessageCircle,
+  Sparkles,
   X,
 } from "lucide-react";
-import { clinicProfile } from "@/config/clinic";
-import { clinicDetails } from "@/config/client-details";
+import { useEffect, useState } from "react";
+import { aksharServices } from "@/lib/aksharServices";
+import { Link } from "wouter";
 
-function Mark({ className = "" }: { className?: string }) {
+const whatsappLink = "https://wa.me/919409313494";
+
+const services = [
+  {
+    number: "01",
+    title: "Everyday dentistry",
+    detail:
+      "Checkups, teeth cleaning, preventive guidance, and restorative care that helps keep small concerns manageable.",
+    cta: "Explore general care",
+    href: "/services/dental-checkups-exams",
+    image: "/clinic-assets/morrow-care-routine.jpg",
+    tone: "sage",
+  },
+  {
+    number: "02",
+    title: "Smile design",
+    detail:
+      "Whitening, veneers, and smile makeovers planned around your features, your goals, and your comfort.",
+    cta: "Discover smile options",
+    href: "/services/teeth-whitening",
+    image: "/clinic-assets/morrow-care-smile.jpg",
+    tone: "rose",
+  },
+  {
+    number: "03",
+    title: "Advanced solutions",
+    detail:
+      "Implants, root canal treatment, braces, and full-mouth rehabilitation with a clear treatment roadmap.",
+    cta: "See advanced care",
+    href: "/services/dental-implants",
+    image: "/clinic-assets/morrow-care-technology.jpg",
+    tone: "blue",
+  },
+];
+
+const comfortItems = [
+  "A friendly first conversation before any treatment is planned.",
+  "Care for children, adults, and every stage of the family smile.",
+  "Clear recommendations with time to understand your options.",
+];
+
+const faqs = [
+  {
+    question: "Are dental implants painful, and how long do they last?",
+    answer:
+      "Implant treatment is planned carefully around your oral health and comfort. Dr. Aneri can explain the expected steps, aftercare, and the option that is right for your individual case during a consultation.",
+  },
+  {
+    question: "Why do gums bleed when brushing?",
+    answer:
+      "Bleeding gums can have several causes, including plaque buildup and gum inflammation. A dental assessment helps identify what is happening and the right next step for your gum health.",
+  },
+  {
+    question: "Do you provide dental care for children?",
+    answer:
+      "Yes. Akshar Dental Clinic offers pediatric dentistry with an approach designed to help children feel comfortable while building healthy early habits.",
+  },
+  {
+    question: "How do I request an appointment?",
+    answer:
+      "The easiest way to start is by sending the clinic a WhatsApp message. Share the concern or treatment you would like to discuss, and the team can guide you from there.",
+  },
+];
+
+function ArrowLink({ children }: { children: React.ReactNode }) {
   return (
-    <img
-      src={clinicProfile.assets.logo}
-      alt={`${clinicProfile.fullName} abstract smile mark`}
-      className={className}
-    />
+    <a className="arrow-link" href="#visit">
+      <span>{children}</span>
+      <ArrowRight aria-hidden="true" size={16} strokeWidth={1.8} />
+    </a>
   );
 }
 
-function Sunline({ className = "" }: { className?: string }) {
-  return <span className={`sunline ${className}`} aria-hidden="true" />;
+function WhatsAppButton({ className = "button button-primary", children }: { className?: string; children: React.ReactNode }) {
+  return (
+    <a className={className} href={whatsappLink} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  );
+}
+
+const serviceListScrollKey = "akshar-service-list-scroll-y";
+
+function rememberServiceListPosition() {
+  window.sessionStorage.setItem(serviceListScrollKey, String(window.scrollY));
+  window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openQuestion, setOpenQuestion] = useState(0);
-
-  useEffect(() => {
-    document.title = clinicProfile.pageTitle;
-  }, []);
-
+  const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
   const closeMenu = () => setMenuOpen(false);
 
+  useEffect(() => {
+    const savedPosition = window.sessionStorage.getItem(serviceListScrollKey);
+    if (!savedPosition) return;
+
+    window.sessionStorage.removeItem(serviceListScrollKey);
+    const targetY = Number(savedPosition);
+    const restoreTimer = window.setTimeout(() => {
+      window.scrollTo({ top: Number.isFinite(targetY) ? targetY : 0, behavior: "smooth" });
+    }, 80);
+
+    return () => window.clearTimeout(restoreTimer);
+  }, []);
+
   return (
-    <div className="min-h-screen overflow-hidden bg-[#f6f1e8] text-[#183d35]">
-      <div className="location-ribbon">
-        <span>{clinicProfile.fullName.toUpperCase()}</span>
-        <span className="hidden sm:inline">—</span>
-        <span>{clinicProfile.locationRibbon.toUpperCase()}</span>
-      </div>
+    <div className="site-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
 
       <header className="site-header">
-        <a className="brand-lockup" href="#top" aria-label={`${clinicProfile.fullName} home`}>
-          <Mark className="h-14 w-14 object-contain" />
-          <span>
-            <strong>{clinicProfile.shortName}</strong>
-            <em>{clinicProfile.descriptor}</em>
-          </span>
+        <a className="brand brand-logo-link" href="#top" aria-label="Akshar Dental Clinic home">
+          <img className="brand-logo" src="/clinic-assets/akshar-dental-clinic-logo.webp" alt="Akshar Dental Clinic" />
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="#first-visit">First visit</a>
-          <a href="#care">Care options</a>
-          <a href="#location">Find us</a>
+          <a href="#care">Services</a>
+          <a href="#doctor">Doctor</a>
+          <a href="#visit">Contact</a>
         </nav>
 
         <div className="header-actions">
-          <a className="phone-link" href={clinicProfile.phoneHref}>
-            <Phone size={15} strokeWidth={2.2} />
-            <span>{clinicProfile.phoneNumber}</span>
-          </a>
-          <a className="btn btn-primary header-cta" href={clinicProfile.phoneHref}>
-            <span>Call the clinic</span>
-            <ArrowUpRight size={16} />
-          </a>
-          <button
-            className="menu-button"
-            onClick={() => setMenuOpen((current) => !current)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <WhatsAppButton className="button button-primary header-book">
+            Book appointment <ArrowDownRight size={16} strokeWidth={1.8} />
+          </WhatsAppButton>
+          <Button aria-label={menuOpen ? "Close navigation" : "Open navigation"} className="menu-button" onClick={() => setMenuOpen((open) => !open)} variant="ghost" size="icon">
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </Button>
         </div>
-
-        {menuOpen && (
-          <div className="mobile-menu">
-            <a href="#first-visit" onClick={closeMenu}>First visit</a>
-            <a href="#care" onClick={closeMenu}>Care options</a>
-            <a href="#location" onClick={closeMenu}>Find us</a>
-            <a className="mobile-call" href={clinicProfile.phoneHref} onClick={closeMenu}>
-              <Phone size={16} /> Call {clinicProfile.phoneNumber}
-            </a>
-          </div>
-        )}
       </header>
 
-      <main id="top">
-        <section className="hero-section" aria-labelledby="hero-heading">
-          <div className="hero-orbit hero-orbit-left" aria-hidden="true" />
-          <div className="hero-copy">
-            <div className="hero-signature">
-              <Mark className="h-11 w-11 object-contain" />
-              <p className="eyebrow"><Sunline /> {clinicProfile.locationEyebrow.toUpperCase()}</p>
-            </div>
-            <p className="hero-clinic-name">{clinicProfile.fullName}</p>
-            <h1 id="hero-heading">{clinicProfile.heroHeading}</h1>
-            <p className="hero-intro">
-              {clinicProfile.heroIntro}
-            </p>
-            <div className="hero-actions">
-              <a className="btn btn-primary" href={clinicProfile.phoneHref}>
-                <Phone size={17} /> Call to plan a visit
-              </a>
-              <a className="text-action" href="#location">
-                Find the clinic <ArrowUpRight size={16} />
-              </a>
-            </div>
-            <div className="hero-detail">
-              <Compass size={18} />
-              <span>{clinicProfile.heroDetail}</span>
-            </div>
-          </div>
+      {menuOpen && (
+        <nav className="mobile-nav" aria-label="Mobile navigation">
+          <a href="#care" onClick={closeMenu}>Services <ChevronRight size={18} /></a>
+          <a href="#doctor" onClick={closeMenu}>Meet Dr. Aneri <ChevronRight size={18} /></a>
+          <a href="#visit" onClick={closeMenu}>Contact us <ChevronRight size={18} /></a>
+          <a href={whatsappLink} target="_blank" rel="noreferrer" onClick={closeMenu}>WhatsApp appointment <MessageCircle size={18} /></a>
+        </nav>
+      )}
 
-          <div className="hero-visual">
-            <div className="hero-image-frame">
-              <img
-                src={clinicProfile.assets.hero}
-                alt="A warm, sunlit dental consultation room"
-              />
+      <main id="main-content">
+        <section className="hero" id="top">
+          <div className="hero-grid">
+            <div className="hero-image-wrap hero-doctor-image">
+              <div className="hero-orbit orbit-one" aria-hidden="true" />
+              <img className="hero-image" src="/clinic-assets/akshar-dr-aneri-moradiya.webp" alt="Dr. Aneri Moradiya of Akshar Dental Clinic" />
+              <div className="image-caption"><span>Dr. Aneri Moradiya</span><span>BDS</span></div>
             </div>
-            <div className="hero-note">
-              <span className="note-dot" />
-              <span>{clinicProfile.heroNote}</span>
-            </div>
-          </div>
-        </section>
 
-        <section id="first-visit" className="first-visit-section" aria-labelledby="first-visit-heading">
-          <div className="first-visit-intro">
-            <div className="intro-marker">{clinicProfile.monogram}</div>
-            <div>
-              <p className="eyebrow"><Sunline /> NEW PATIENTS · {clinicDetails.localLandmark.toUpperCase()}</p>
-              <h2 id="first-visit-heading">{clinicDetails.firstVisitHeading}</h2>
-              <p>{clinicDetails.firstVisitCopy}</p>
-            </div>
-          </div>
-          <div className="first-visit-steps">
-            {clinicDetails.firstVisitSteps.map((item) => (
-              <div className="first-visit-step" key={item.step}>
-                <span>{item.step}</span>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
+            <div className="hero-copy">
+              <p className="eyebrow"><span className="eyebrow-spark" /> Akshar Dental Clinic · Surat</p>
+              <h1>Care that gives your smile a <em>fresh start.</em></h1>
+              <p className="hero-intro">General, cosmetic, and restorative dentistry made clear, comfortable, and close to home in Surat.</p>
+              <div className="hero-actions">
+                <WhatsAppButton>
+                  Request an appointment <ArrowDownRight size={17} strokeWidth={1.8} />
+                </WhatsAppButton>
+                <a className="text-cta" href="#doctor">Meet Dr. Aneri <ArrowRight size={16} strokeWidth={1.8} /></a>
               </div>
-            ))}
+              <div className="hero-proof">
+                <div className="proof-symbol" aria-hidden="true"><Sparkles size={16} strokeWidth={1.7} /></div>
+                <p><strong>Trusted care, thoughtfully explained.</strong><span>Serving Katargam, Dabholi, Amroli, and nearby Surat.</span></p>
+              </div>
+            </div>
           </div>
-          <a href={clinicProfile.phoneHref} className="round-arrow" aria-label={`Call ${clinicProfile.fullName}`}>
-            <Phone size={21} />
-          </a>
+          <div className="hero-side-note" aria-hidden="true"><span>Personal care</span><span className="note-line" /><span>Surat, Gujarat</span></div>
         </section>
 
-        <section id="care" className="care-section" aria-labelledby="care-heading">
-          <div className="section-header split-heading">
+        <section className="intro-section" id="doctor">
+          <div className="section-mark">01</div>
+          <div className="intro-layout">
             <div>
-              <p className="eyebrow"><Sunline /> WHAT BRINGS YOU IN?</p>
-              <h2 id="care-heading">A path for the moment you are in.</h2>
+              <p className="eyebrow">Meet your dentist</p>
+              <h2>Expert care with a <em>gentle pace.</em></h2>
             </div>
-            <p>
-              A clear first conversation makes everything that follows feel more manageable. Choose the place that feels closest to your needs today.
-            </p>
+            <div className="intro-note">
+              <p><strong>Dr. Aneri Moradiya, BDS</strong> is a specialist in general and cosmetic dentistry with more than seven years of hands-on experience. At Akshar, each plan starts with a careful listen and a clear explanation.</p>
+              <ArrowLink>See how we approach your care</ArrowLink>
+            </div>
           </div>
+          <div className="comfort-grid">
+            <div className="comfort-title"><span className="orbit-icon" aria-hidden="true" /><p>Thoughtful in the details. Clear in the plan.</p></div>
+            <div className="comfort-list">
+              {comfortItems.map((item, index) => (
+                <div className="comfort-item" key={item}><span>0{index + 1}</span><p>{item}</p><Check size={18} strokeWidth={1.7} aria-hidden="true" /></div>
+              ))}
+            </div>
+          </div>
+          <div className="doctor-note">
+            <div className="doctor-note-mark" aria-hidden="true"><span>Dr.</span><i>A</i></div>
+            <div>
+              <p className="eyebrow">A note on your care</p>
+              <h3>One clinic. One clear place to begin.</h3>
+              <p>From a child’s first dental visit to a cosmetic goal or a more involved treatment, Dr. Aneri brings general, cosmetic, and restorative care into a plan shaped around the person in the chair.</p>
+            </div>
+            <div className="doctor-note-meta"><span>7+ years</span><small>Hands-on experience</small><span>4 areas</span><small>Katargam · Dabholi · Amroli · Singanpor</small></div>
+          </div>
+        </section>
 
-          <div className="care-list">
-            {clinicProfile.carePaths.map(({ number, label, title, text, action, icon: Icon, tone }) => (
-              <article className={`care-card care-card-${tone}`} key={number}>
-                <div className="care-number">{number}</div>
-                <div className="care-icon"><Icon size={27} strokeWidth={1.5} /></div>
-                <p className="care-label">{label}</p>
-                <h3>{title}</h3>
-                <p className="care-copy">{text}</p>
-                <a href={clinicProfile.phoneHref} className="card-action">
-                  {action} <ChevronRight size={18} />
-                </a>
+        <section className="ticker" aria-label="Akshar Dental Clinic message">
+          <div className="ticker-track"><span>Clear answers</span><i>✦</i><span>Confident smiles</span><i>✦</i><span>Care for every age</span><i>✦</i><span>Clear answers</span><i>✦</i><span>Confident smiles</span><i>✦</i><span>Care for every age</span><i>✦</i></div>
+        </section>
+
+        <section className="services-section" id="care">
+          <div className="section-head services-head">
+            <div><p className="eyebrow">How we can help</p><h2>Care for the smile you have, and the one you <em>want to grow.</em></h2></div>
+            <p>From regular checks to advanced treatment, the clinic brings many of your dental needs into one considered care plan.</p>
+          </div>
+          <div className="services-stack">
+            {services.map((service) => (
+              <article className={`service-card ${service.tone}`} key={service.number}>
+                <div className="service-image-wrap"><img src={service.image} alt="" className="service-image" /><span className="service-number">{service.number}</span></div>
+                <div className="service-copy"><p className="service-kicker">Akshar Dental Clinic</p><h3>{service.title}</h3><p>{service.detail}</p><Link className="arrow-link" href={service.href} onClick={rememberServiceListPosition}>{service.cta}<ArrowRight size={16} strokeWidth={1.8} /></Link></div>
               </article>
             ))}
           </div>
-        </section>
-
-        <section id="visit" className="visit-section" aria-labelledby="visit-heading">
-          <div className="visit-copy">
-            <p className="eyebrow"><Sunline /> YOUR FIRST STEP</p>
-            <h2 id="visit-heading">{clinicProfile.visitHeading}</h2>
-            <p>
-              {clinicProfile.visitCopy}
-            </p>
-            <div className="visit-links">
-              <a className="btn btn-light" href={clinicProfile.phoneHref}>
-                <CalendarDays size={17} /> Speak with the clinic
-              </a>
-              <a className="visit-phone" href={clinicProfile.phoneHref}>{clinicProfile.phoneNumber}</a>
+          <div className="service-directory">
+            <div className="service-directory-intro">
+              <p className="eyebrow">The complete care menu</p>
+              <h3>More ways we can help your smile <em>feel like itself.</em></h3>
+              <p>Whether you know exactly what you need or you are simply ready to ask, there is a useful place to start.</p>
+              <WhatsAppButton className="button button-outline">Ask about a treatment <MessageCircle size={16} strokeWidth={1.8} /></WhatsAppButton>
             </div>
-          </div>
-          <div className="visit-photo-wrap">
-            <div className="vertical-label">EASE • CLARITY • CARE</div>
-            <img
-              src={clinicProfile.assets.visit}
-              alt="A relaxed patient in a welcoming dental consultation setting"
-            />
-            <div className="photo-affirmation">
-              <ShieldCheck size={20} />
-              <span>{clinicProfile.visitAffirmation}</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="details-section" aria-label="Care experience">
-          <div className="detail-image-column">
-            <img
-              src={clinicProfile.assets.detail}
-              alt="A tranquil, sunlit welcome setting"
-            />
-          </div>
-          <div className="detail-content">
-            <p className="eyebrow"><Sunline /> MADE FOR A MORE COMFORTABLE DAY</p>
-            <h2>A patient experience with room to breathe.</h2>
-            <div className="experience-grid">
-              <div>
-                <span className="experience-index">A</span>
-                <h3>Start with the question</h3>
-                <p>Bring the concern you have. A meaningful appointment begins there.</p>
-              </div>
-              <div>
-                <span className="experience-index">B</span>
-                <h3>Know where you are going</h3>
-                <p>Clear directions and a visible call path make arriving simpler.</p>
-              </div>
-              <div>
-                <span className="experience-index">C</span>
-                <h3>Choose the next right step</h3>
-                <p>Dental decisions are easier when the conversation feels considered.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="faq-section" aria-labelledby="faq-heading">
-          <div className="faq-intro">
-            <p className="eyebrow"><Sunline /> PRACTICAL DETAILS</p>
-            <h2 id="faq-heading">A few things worth knowing.</h2>
-            <p>Everything a prospective patient needs to feel oriented—without the clutter.</p>
-          </div>
-          <div className="faq-list">
-            {clinicProfile.questions.map((item, index) => {
-              const isOpen = openQuestion === index;
-              return (
-                <div className={`faq-item ${isOpen ? "open" : ""}`} key={item.question}>
-                  <button onClick={() => setOpenQuestion(isOpen ? -1 : index)} aria-expanded={isOpen}>
-                    <span>{item.question}</span>
-                    <ChevronDown size={20} />
-                  </button>
-                  {isOpen && <p>{item.answer}</p>}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section id="location" className="location-section" aria-labelledby="location-heading">
-          <div className="location-card">
-            <div className="location-topline"><MapPin size={17} /> {clinicProfile.locationShort.toUpperCase()}</div>
-            <h2 id="location-heading">Close to the roads you already know.</h2>
-            <p>
-              {clinicProfile.addressLines.map((line) => (
-                <span key={line}>{line}<br /></span>
+            <div className="service-directory-list">
+              {aksharServices.map((service) => (
+                <Link className="directory-item" key={service.slug} href={`/services/${service.slug}`} onClick={rememberServiceListPosition}>
+                  <span>{service.number}</span>
+                  <div><h4>{service.title}</h4><p>{service.summary}</p></div>
+                  <ArrowRight size={17} strokeWidth={1.7} aria-hidden="true" />
+                </Link>
               ))}
-            </p>
-            <div className="location-actions">
-              <a className="btn btn-saffron" href={clinicProfile.mapHref} target="_blank" rel="noreferrer">
-                <MapPin size={17} /> Get directions
-              </a>
-              <a className="text-action light-text" href={clinicProfile.phoneHref}>
-                <Phone size={15} /> {clinicProfile.phoneNumber}
-              </a>
             </div>
           </div>
-          <div className="location-art" aria-hidden="true">
-            <div className="map-line map-line-one" />
-            <div className="map-line map-line-two" />
-            <div className="map-line map-line-three" />
-            <div className="map-pin"><MapPin size={25} /></div>
-            <span className="map-label">{clinicProfile.mapLabel.toUpperCase()}</span>
+        </section>
+
+        <section className="technology-section">
+          <div className="tech-paper">
+            <div className="tech-label"><span>02</span><p>Complete dental care</p></div>
+            <div className="tech-title"><p className="eyebrow">From a simple checkup to a full restoration</p><h2>Good dentistry starts with <em>clear next steps.</em></h2></div>
+            <div className="tech-details">
+              <div><span className="detail-number">01</span><h3>Personal assessment</h3><p>Your concern, oral health, and goals are understood before a treatment path is discussed.</p></div>
+              <div><span className="detail-number">02</span><h3>Thoughtful treatment</h3><p>Whether you need a cleaning, a root canal, braces, or implants, each step has a purpose.</p></div>
+              <div><span className="detail-number">03</span><h3>Care that continues</h3><p>Follow-up guidance helps you protect your oral health long after your appointment.</p></div>
+            </div>
+            <div className="tech-orbit" aria-hidden="true"><span>a</span></div>
+          </div>
+        </section>
+
+        <section className="visit-section" id="visit">
+          <div className="visit-grid">
+            <div className="visit-main">
+              <p className="eyebrow">Book an appointment</p>
+              <h2>Start with a message. <em>We will guide you from there.</em></h2>
+              <p className="visit-intro">Tell us what you would like to discuss—whether it is a routine visit, a child’s first dental check, a smile concern, or a treatment question. The clinic can help you take the next step.</p>
+              <WhatsAppButton className="button button-cream">Message Akshar on WhatsApp <MessageCircle size={17} strokeWidth={1.8} /></WhatsAppButton>
+            </div>
+            <aside className="visit-card">
+              <p className="visit-card-label">At a glance</p>
+              <div className="visit-card-item"><CalendarDays size={21} strokeWidth={1.6} /><p><strong>Appointments by WhatsApp</strong><span>Send your question to begin</span></p></div>
+              <div className="visit-card-item"><Clock3 size={21} strokeWidth={1.6} /><p><strong>Serving Surat families</strong><span>Katargam · Dabholi · Amroli · Singanpor</span></p></div>
+              <a href={whatsappLink} target="_blank" rel="noreferrer" className="visit-card-phone"><MessageCircle size={16} strokeWidth={1.8} /> +91 94093 13494</a>
+            </aside>
+          </div>
+        </section>
+
+        <section className="faq-section">
+          <div className="faq-heading"><p className="eyebrow">Helpful answers</p><h2>Nothing too small to <em>ask first.</em></h2><p>Some useful context before you plan your visit.</p></div>
+          <div className="faq-guide"><span>Tap a question</span><span>Answers open here <ArrowDownRight size={14} /></span></div>
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <div className={`faq-card ${activeFaqIndex === index ? "is-open" : ""}`} key={faq.question}>
+                <button className="faq-question" type="button" aria-expanded={activeFaqIndex === index} aria-controls={`faq-answer-${index}`} onClick={() => setActiveFaqIndex((open) => open === index ? null : index)}>
+                  <span className="faq-number">0{index + 1}</span><span>{faq.question}</span><ArrowDownRight aria-hidden="true" size={17} strokeWidth={1.8} />
+                </button>
+                <div className="faq-answer" id={`faq-answer-${index}`} aria-hidden={activeFaqIndex !== index}><p>{faq.answer}</p><a href={whatsappLink} target="_blank" rel="noreferrer">Still have a question? Ask on WhatsApp <ArrowRight size={14} /></a></div>
+              </div>
+            ))}
           </div>
         </section>
       </main>
 
       <footer className="site-footer">
-        <div className="footer-brand">
-          <Mark className="h-10 w-10 object-contain" />
-          <div>
-            <strong>{clinicProfile.shortName} Dental</strong>
-            <span>{clinicProfile.descriptor}</span>
+        <div className="footer-top">
+          <div className="footer-brand">
+            <a className="brand brand-light brand-logo-link" href="#top"><img className="brand-logo" src="/clinic-assets/akshar-dental-clinic-logo.webp" alt="Akshar Dental Clinic" /></a>
+            <p>Modern, patient-first dental care for Surat and surrounding communities.</p>
           </div>
+          <div className="footer-nav"><p>Explore</p><a href="#care">Services</a><a href="#doctor">Meet Dr. Aneri</a><a href="#visit">Book appointment</a></div>
+          <div className="footer-nav"><p>Connect</p><a href={whatsappLink} target="_blank" rel="noreferrer">WhatsApp us</a><a href="https://www.instagram.com/dentist_aneri/" target="_blank" rel="noreferrer">@dentist_aneri</a><span>Katargam · Dabholi · Amroli · Singanpor</span></div>
         </div>
-        <p>{clinicProfile.footerLine}</p>
-        <div className="footer-links">
-          <a href={clinicProfile.phoneHref}>Call the clinic</a>
-          <a href={clinicProfile.mapHref} target="_blank" rel="noreferrer">Directions</a>
-        </div>
+        <div className="footer-bottom"><p>© 2026 Akshar Dental Clinic</p><p>Surat, Gujarat</p><a href="#top">Back to top <ArrowRight size={14} /></a></div>
       </footer>
+
     </div>
   );
 }

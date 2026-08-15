@@ -1,80 +1,91 @@
-# Riddhi Dental Clinic & Implant Center — Website Direction
+# Morrow Dental Studio — Design Exploration
 
-## Three stylistic approaches considered
+## Three Directions Considered
 
-| Theme Name | Very Brief Intro | Probability |
-|---|---|---:|
-| Sunlit Sanctuary | A soft, confident healthcare identity where carefully framed daylight and botanical calm make clinical care feel reassuring. It signals modern treatment without feeling cold. | 0.07 |
-| Editorial Precision | A high-contrast, magazine-inspired clinic experience that turns treatment education into a considered visual narrative. It is composed, tactile, and quietly premium. | 0.04 |
-| Neighbourhood Smile Studio | A bright, approachable local-care approach that uses warm portraiture and friendly modular shapes to create an easy first step for new patients. | 0.09 |
+### 1. Sunroom Dentistry
+**Very Brief Intro:** A comfort-first dental studio that feels like a carefully designed coastal home: soft daylight, editorial type, and tactile materials. It makes dental care feel grounded rather than clinical.
 
-## Chosen approach: Sunlit Sanctuary
+**Probability:** 0.06
+
+### 2. Blue Hour Precision
+**Very Brief Intro:** A cool, technology-forward treatment of dentistry with deep cobalt, chrome, night photography, and precise grid systems. It would foreground advanced clinical systems and after-hours access.
+
+**Probability:** 0.03
+
+### 3. Weekend Apothecary
+**Very Brief Intro:** A playful, optimistic wellness identity inspired by a neighborhood apothecary, using oversized labels, botanical illustrations, and cheerful citrus colors.
+
+**Probability:** 0.08
+
+---
+
+## Chosen Direction — Sunroom Dentistry
 
 ### Design Movement
-
-**Contemporary restorative hospitality**: an editorially composed healthcare experience influenced by calm boutique hotels, natural materials, and Indian morning light. The website borrows Canary Dental’s patient-first composure and clear pathways, without copying its layout, language, or visual assets.
+**Warm editorial modernism** with quiet nods to Scandinavian hospitality and Japanese material restraint. The inspiration is a considered independent magazine spread, not a typical clinic brochure.
 
 ### Core Principles
-
-1. **Calm before clinical**: every important decision is framed with warmth, legible language, and generous breathing room.
-2. **Guidance over promotion**: the interface makes it easy to recognize a need and choose an appointment path without overstating services or outcomes.
-3. **Local specificity**: the Adajan location and Gangeshwar Mahadev Temple landmark provide genuine sense of place.
-4. **Confidence through restraint**: the palette, typography, and interactions feel elevated, but never ornamental at the expense of accessibility.
+1. **Calm is a clinical feature.** Every surface, colour, and interaction should lower the temperature of a potentially stressful experience.
+2. **Editorial hierarchy over interface density.** Generous white space, oversized serif moments, and sharp labels give the content a sense of breathing room.
+3. **Soft geometry creates familiarity.** Archways, circles, rounded tabs, and an orbiting logo element echo a smile without resorting to dental clip art.
+4. **Precision in the details.** Monospaced service labels, controlled borders, disciplined spacing, and asymmetric composition balance the warmth.
 
 ### Color Philosophy
-
-The foundation is warm rice paper and limestone, creating the perception of a clean, quiet waiting room rather than a stark clinic. Deep forest green communicates steadiness and expertise; a **marigold saffron** accent recalls Surat’s golden morning light and gives the brand a memorable, optimistic signal for key moments. Pale eucalyptus and muted terracotta create warmth in supporting surfaces without a typical medical-blue palette.
+Paper-white and oat form an unhurried canvas associated with morning light. **Morrow Cobalt (#193E5B)** is the signature anchor: clear, memorable, and reassuring without reading as conventional medical blue. Terracotta is used sparingly as a human, sun-warmed counterpoint; pale sage indicates care and renewal. Every colour should feel found in a north-coast home rather than selected from a medical UI palette.
 
 ### Layout Paradigm
-
-The site follows a **curated gallery walk** instead of a centralized landing-page grid. The top hero uses an offset composition: a large warm image portal on the left, structured appointment guidance on the right. Sections alternate between full-bleed editorial bands, offset cards, and slim navigation rails. Each treatment route reads like an intentional chapter rather than a sales tile.
+The home is composed as a **vertical editorial walk**: a left-weighted arch image introduces the studio; later, dense information alternates with large image windows, an off-centre promise panel, and a continuous lower ticker. This is intentionally not a centrally stacked card grid.
 
 ### Signature Elements
-
-1. **The arched care portal**: a subtly textured, tall arch framing the hero imagery and recurring as a structural motif.
-2. **The sunline**: a thin saffron rule paired with small directional labels, grounding the editorial hierarchy.
-3. **Leaf-and-smile glyphs**: delicate botanical linework mixed with precise dental geometry, used sparingly in dividers and detail cards.
+- **The Morrow orbit:** a circular sun/tooth logo with a tiny terracotta spark, repeated as an oversized watermark.
+- **Vertical field notes:** small monospace labels and numbered moments that behave like magazine marginalia.
+- **The soft arch:** cropped image windows and spatial cut-outs that recur across the page.
 
 ### Interaction Philosophy
-
-Interactions should reward attention rather than demand it. Cards lift slightly as they reveal an appointment cue; navigation anchors glide to the next chapter; the mobile booking control remains available but unobtrusive. Each interaction has an obvious patient-serving purpose.
+Interactions should affirm rather than demand attention: buttons compress subtly on click, service cards lift and reveal an arrow, and FAQs open with immediate readability. The booking action is consistently visible but never shouts.
 
 ### Animation
-
-Use 180–280ms transitions with a custom ease-out. Hero text and information cards can enter with a small upward fade, staggered at 50ms. The sunline expands once on scroll into the viewport; treatment cards use transform-only hover movement. Motion is disabled under `prefers-reduced-motion`.
+Use 180–260 ms custom ease-out transitions for buttons and links. Image cards may lift by 5 px and gently scale their image on hover. On supported devices, the horizontal phrase strip moves slowly and continuously; reduced-motion users receive a static strip. No bouncing, no dramatic parallax, and no opacity flicker.
 
 ### Typography System
-
-**DM Serif Display** handles major headlines with an approachable editorial tone. **Manrope** supports UI, treatment information, and long-form reading with crisp but friendly proportions. Uppercase micro-labels use Manrope at generous tracking; display headings never exceed two lines on desktop where practical.
+**Fraunces** provides expressive, slightly soft display headlines; use it at 400–600 weight with tight but not compressed tracking. **DM Mono** is for labels, numbers, address details, and utility navigation. **Manrope** is the plainspoken, highly readable body companion. Display titles can occupy two to four deliberate lines; body copy stays compact and conversational.
 
 ### Brand Essence
-
-**Riddhi Dental Clinic & Implant Center is a calm, local-first destination for thoughtful dental visits in Adajan, Surat—built to make the next step feel clear.**
-
-Personality: **reassuring, considered, sunlit**.
+**Morrow Dental Studio is a North Vancouver dental practice for people who want clear, considered care in a space that helps them exhale.** Personality: **warm, exacting, neighbourly**.
 
 ### Brand Voice
+Headlines are gentle but decisive; CTAs are specific and low-pressure; microcopy acknowledges real concerns without medical jargon.
 
-Headlines are grounded, sensitive, and never overpromise. CTAs tell patients exactly what happens next. Avoid generic fillers such as “Welcome to our website” and “Get started today.”
+> “A better dental day starts with a softer landing.”
 
-> “Care that begins with a calmer conversation.”
-
-> “Find your way to a more comfortable appointment.”
+> “Bring your questions. We’ll make room for every one.”
 
 ### Wordmark & Logo
-
-The mark is an abstract **R-shaped arch** that combines a smiling curve with a leaf-like upper stroke—recognizable at favicon scale, expressive without relying on text. The wordmark uses spaced, dignified small caps, never a default sans-serif treatment.
+A custom **orbital smile-mark**—an incomplete cobalt circle suggesting both morning sun and a tooth outline, offset by a terracotta spark. It is paired with a compact DM Mono wordmark in uppercase and carefully letterspaced; the small clinic descriptor sits on its own line.
 
 ### Signature Brand Color
+**Morrow Cobalt — #193E5B**
 
-**Saffron Sunline — #D7853C**
+---
 
-## Personalization and content boundaries
+## Akshar Dental Clinic Rebrand Amendment
 
-The concept is personalized to **Riddhi Dental Clinic & Implant Center**, using public lead information: its Adajan address opposite Axis Bank on Gangeshwar Mahadev Temple Road and public phone number, **+91 63526 86155**. The site does not invent clinician credentials, patient ratings, reviews, operational hours, pricing, technology, treatment outcomes, or availability. These will remain clearly labeled as items to confirm prior to publishing.
+### Chosen Direction — Surat Morning
 
-## Style Decisions
+The new site keeps the prior editorial calm, but shifts its cultural and clinical anchor to **Akshar Dental Clinic in Surat**. It uses the practice’s own teal logo as the identifying mark and pairs it with warm mineral paper, saffron-coral details, and dark ink. The result should feel established, precise, and welcoming—not like a generic luxury clinic and not like a hospital template.
 
-- Patient-facing copy must always address a prospective patient directly; it must not describe the experience as a concept, design artifact, or preview.
-- Saffron Sunline is reserved for micro-rules, key icons, direction and appointment CTAs, while rice paper, limestone, eucalyptus, and forest green remain the dominant surfaces.
-- The R-shaped arch/smile/leaf signature recurs in the hero signature, header and footer mark, circular detail motifs, and arched image portals to create an ownable clinic identity.
+### Mobile-First Rule
+
+At small screens, imagery must **frame the information rather than compete with it**. The first viewport gives priority to the clinic name, doctor credential, service area, and WhatsApp appointment action. The clinician portrait appears as a compact landscape panel after the hero copy, capped at 275 pixels high. Every service image stays within a 220-pixel card window; no media block may occupy a full phone viewport on its own.
+
+### Content and Conversion Rule
+
+The site will use only the published Akshar details: Dr. Aneri Moradiya, BDS; service coverage for Katargam, Dabholi, and Amroli; and the WhatsApp appointment route. Calls to action use direct WhatsApp messaging so the completed UI has an actionable, verified booking path.
+
+### Detailed Care Structure
+
+Keep the three editorial service pathways as an approachable overview, then add a compact **Complete care at Akshar** directory immediately below them. It should hold the full public treatment catalogue and read like an elegant clinic menu, not a stack of generic cards. A warm doctor-detail panel will add personal context using the verified facts: Dr. Aneri Moradiya, BDS; more than seven years of hands-on experience; and a practice that serves Katargam, Dabholi, Amroli, and Singanpor.
+
+### Interaction Amendment
+
+Every item in the complete-care directory is now a route to a focused treatment page. FAQ prompts are displayed as separate, touch-sized cards with numbered labels, an explicit “Tap a question” cue, and a circular chevron that changes state when the answer is expanded.

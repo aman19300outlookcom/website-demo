@@ -1,6 +1,6 @@
 # Cloudflare Worker Deployment
 
-This repository is a **static Vite + React single-page application** configured for Cloudflare’s Git-integrated **Worker** flow. The `wrangler.jsonc` file uses Workers Static Assets to publish `dist/public` and applies SPA fallback routing.
+This repository is a **static Vite + React single-page application for Akshar Dental Clinic** configured for Cloudflare’s Git-integrated **Worker** flow. The `wrangler.jsonc` file uses Workers Static Assets to publish `dist/public` and applies SPA fallback routing.
 
 | Worker setup field | Value |
 |---|---|

@@ -1,14 +1,23 @@
-# Deployment Checklist
-
-- [x] Confirm the static build output directory and Cloudflare-compatible build command.
-- [x] Confirm access to `aman19300outlookcom/website-demo` and inspect its current Git state.
-- [x] Add deployment metadata and publish the finished source to the repository.
-- [x] Provide the exact Cloudflare Pages values and explain the continuous deployment workflow.
-- [x] Confirm the Git-integrated Cloudflare Worker static-assets configuration.
-- [x] Add the Worker configuration and deployment script to the published repository.
-- [x] Verify the Worker deployment command against the production build output.
-- [x] Provide field-by-field values for the Worker setup screen.
-- [ ] Correct the Cloudflare Worker deploy command to invoke the package script explicitly.
-- [ ] Remove unresolved preview-only analytics placeholders from the production HTML.
-- [ ] Verify the corrected command locally and publish the update.
-- [ ] Provide the exact Cloudflare retry steps.
+- [x] Review the public Akshar Dental Clinic site for verified name, services, contact details, and location information.
+- [x] Replace the Morrow identity, illustrative copy, and contact details with Akshar Dental Clinic content.
+- [x] Reshape the mobile hero and service imagery to compact, content-supporting proportions.
+- [x] Verify the revised site on desktop and mobile, then save a delivery checkpoint.
+- [x] Review the Services and Clinic Photos pages for all published treatments and clinic-specific information.
+- [x] Add a detailed service directory using the complete published Akshar service list.
+- [x] Introduce more personal Dr. Aneri and family-care messaging without inventing facts.
+- [x] Center the mobile portrait crop and verify the complete refined page across device sizes.
+- [x] Add detailed treatment routes for every service listed in the complete care directory.
+- [x] Connect each treatment-directory row to its corresponding detail page.
+- [x] Redesign the FAQ with clear tap targets, visible expand states, and a more helpful visual hierarchy.
+- [x] Validate service navigation and FAQ behavior on mobile and desktop.
+- [x] Remove the fixed mobile WhatsApp booking bar and preserve clear in-context booking actions.
+- [x] Simplify redundant mobile labels and decorative elements that do not improve scanning or conversion.
+- [x] Rebalance mobile spacing and validate the streamlined layout at phone size.
+- [x] Center the Dr. Aneri hero portrait evenly in the mobile image frame and verify the crop.
+- [x] Expand the desktop FAQ composition across the available content width and verify it remains mobile-safe.
+- [x] Remove the WhatsApp link from the desktop header and retain the appointment call to action.
+- [x] Preserve the visitor’s service-list position when opening a treatment page and returning with browser back or a phone gesture.
+- [x] Validate the streamlined navigation across desktop and mobile.
+- [ ] Review the referenced Cloudflare publishing agreement and the available integration configuration.
+- [ ] Push the validated Akshar Dental Clinic code to the user’s GitHub account.
+- [ ] Prepare the agreed Cloudflare publishing workflow and report any required publishing confirmation.
