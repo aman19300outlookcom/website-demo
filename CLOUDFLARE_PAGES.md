@@ -1,16 +1,17 @@
-# Cloudflare Pages Deployment
+# Cloudflare Worker Deployment
 
-This repository is a **static Vite + React** website. Create a **Pages** project from the GitHub repository—not a Worker project.
+This repository is a **static Vite + React single-page application** configured for Cloudflare’s Git-integrated **Worker** flow. The `wrangler.jsonc` file uses Workers Static Assets to publish `dist/public` and applies SPA fallback routing.
 
-| Cloudflare Pages field | Value |
+| Worker setup field | Value |
 |---|---|
-| Production branch | `main` |
-| Framework preset | `Vite` |
+| Project name | `website-demo` |
 | Build command | `pnpm build` |
-| Build output directory | `dist/public` |
-| Root directory | Leave blank |
-| Node.js version variable | `22` |
+| Deploy command | `pnpm deploy` |
+| Builds for non-production branches | Enabled |
+| Non-production branch deploy command | `pnpm deploy:preview` |
+| Path | `/` |
+| API token | Create new token automatically |
+| API token name | `website-demo-worker-builds` |
+| Environment variables | None required |
 
-Cloudflare Pages installs dependencies from `pnpm-lock.yaml`, runs the build command, and deploys the generated `dist/public` folder. Each future push to `main` triggers a fresh production deployment. Pull requests create preview deployments automatically when enabled in the Cloudflare Pages project settings.
-
-> Do not use the **Create a Worker** form for this repository. Its `npx wrangler deploy` command is for a Worker-based application and is not required for this static site.
+Cloudflare installs dependencies from `pnpm-lock.yaml`, runs the build command, and then runs `pnpm deploy`, which maps to the repository’s local Wrangler CLI. Every future production-branch push will build and deploy a Worker version. Non-production branches upload preview versions without replacing production.
